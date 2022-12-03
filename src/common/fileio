@@ -1,0 +1,12 @@
+const fs = require("fs");
+
+exports.readInput = (inputLoc) => {
+  
+  console.log("opening file");
+
+  return fs.readFileSync(inputLoc,'utf8');
+}
+
+exports.readLines = (inputLoc) => {
+  return exports.readInput(inputLoc).split('\n');
+}
