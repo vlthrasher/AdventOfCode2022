@@ -17,10 +17,11 @@ function solve() {
     let elf2Min = parseInt(elf2[0]);
     let elf2Max = parseInt(elf2[1]);
 
-    if ((elf1Min <= elf2Min && elf1Max >= elf2Max) ||
-        (elf2Min <= elf1Min && elf2Max >= elf1Max)) {
-          containCount++;
-        }
+    if ((elf1Min <= elf2Max && elf1Max >= elf2Min) || 
+        (elf2Min <= elf1Max && elf2Max >= elf1Min)) {
+      containCount++;
+    }
+
   });
 
   console.log(containCount);
