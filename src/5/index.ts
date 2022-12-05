@@ -27,17 +27,15 @@ function solve() {
     let from = parseInt(stackDirections[0]) - 1;
     let to = parseInt(stackDirections[1]) - 1;
 
-    console.log(direction);
-    // console.log(stacks[from]);
-    // console.log(stacks[to]);
+    let crane = [];
+
     for (let i = 0; i < count; i++) {
-      let crate = stacks[from].pop();
-      stacks[to].push(crate);
+      crane.push(stacks[from].pop());
     }
 
-    // console.log(stacks[from]);
-    // console.log(stacks[to]);
-
+    crane.reverse().forEach((item) => {
+      stacks[to].push(item);
+    })
     
   });
 
