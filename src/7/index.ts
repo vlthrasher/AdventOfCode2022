@@ -77,20 +77,42 @@ function solve() {
 
 
   let root = formTree();
+
+  function getTreeSize(node) {
+    if (node.children !== null) {
+      Object.keys(node.children).forEach(childKey => {
+        getTreeSize(node.children[childKey]);
+      });
+      getDirectorySize(node);
+    }
+  }
+
+  getTreeSize(root);
   console.log(root)
 
-  let directorySizeLessThanMinimum = 0;
+
+  const TOTAL_DISK = 70000000;
+  const freeDisk = TOTAL_DISK - root.size;
+  const REQUIRED_DISK = 30000000;
+  const deleteSize = REQUIRED_DISK - freeDisk;
+
+  console.log(`deleteSize: ${deleteSize}`);
+
+  let minDirectorySize = root.size;
   function dfs(node) {
     if (node.children !== null) {
-      if (node.size < MAX_SIZE) directorySizeLessThanMinimum += node.size;
-      Object.keys(node.children).forEach(childKey => {
-        dfs(node.children[childKey]);
-      });
+      if (node.size > deleteSize) {
+        Object.keys(node.children).forEach(childKey => {
+          dfs(node.children[childKey]);
+        });
+        minDirectorySize = Math.min(minDirectorySize, node.size);
+      }
     }
   }
 
   dfs(root);
-  console.log(directorySizeLessThanMinimum);
+  console.log(`minDirectorySize: ${minDirectorySize}`);
+
 }
 
 solve();
